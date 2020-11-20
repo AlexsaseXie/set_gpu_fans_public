@@ -26,3 +26,11 @@ For installation and usage, read the comments in cool_gpu.
   | 85%   66C    P2   151W / 250W |   2983MiB / 12066MiB |    100%      Default |
   +-------------------------------+----------------------+----------------------+
 ```
+
+how to use:
+```bash
+cd /home/set-gpu-fans
+sudo tcsh
+./cool_gpu >& controller.log &
+tail -f controller.log
+```
