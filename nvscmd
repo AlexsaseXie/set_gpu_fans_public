@@ -95,7 +95,7 @@ loop:
 
     if ($target == -3) then
         # execute heuristic
-        set foo = (`/opt/bin/nvidia-smi dmon -s p -c 1 ${gpuid}| tail -1`)
+        set foo = (`nvidia-smi dmon -s p -c 1 ${gpuid}| tail -1`)
         @ temp = $foo[3]
         @ target = -2
         if (${temp} < 30) then
@@ -148,12 +148,12 @@ loop:
     if (${last_target} != ${target} && ${last_friendly_target} != ${target}) then
         # relinquish fan speed control back to the system
         if ("x${target}" == "x-1") then
-            /usr/bin/nvidia-settings -a '[gpu:0]/GPUFanControlState=0'  $*
+            nvidia-settings -a '[gpu:0]/GPUFanControlState=0'  $*
         endif
     
         # set fan speed on primary GPU to target
         if (${target} >= 0) then
-            /usr/bin/nvidia-settings -a '[gpu:0]/GPUFanControlState=1' -a '[fan:0]/GPUTargetFanSpeed='${target}  $*
+            nvidia-settings -a '[gpu:0]/GPUFanControlState=1' -a '[fan:0]/GPUTargetFanSpeed='${target}  $*
         endif
     endif
 
